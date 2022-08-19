@@ -9,11 +9,8 @@ fechasCommits = []
 for linea in lineas:
     if "Date:" in linea:
         stringFecha = linea[8:-1]
-        fechasCommits.append(datetime.strptime(stringFecha, "%a %b %d %X %Y %z"))
+        fecha = datetime.strptime(stringFecha, "%a %b %d %X %Y %z")
+        fechasCommits.append(fecha.weekday())
         
-cnt = Counter()
-for fecha in fechasCommits:
-    cnt[fecha.day, fecha.month, fecha.year] += 1
-
-print(cnt)
-
+cnt = Counter(fechasCommits)
+print(cnt.most_common())
